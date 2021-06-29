@@ -42,10 +42,10 @@ namespace BagNotify
 
                     if (res != null)
                     {
-                        if (res.price <= options.LessThan!.Value)
+                        if (res.price <= options.LessThan)
                             PrintAlert(res);
 
-                        else if (res.price >= options.MoreThan!.Value)
+                        else if (res.price >= options.MoreThan)
                             PrintAlert(res);
                         
                         else
