@@ -16,7 +16,8 @@ namespace BagNotify
             var client = new System.Net.Mail.SmtpClient(smtp);
             var credentials = new System.Net.NetworkCredential(smtpUserName, smtpPassword);
 
-            client.Port = 587;
+            //client.Port = 587;
+            client.Port = 465;
             client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
             client.EnableSsl = true;

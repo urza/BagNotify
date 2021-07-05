@@ -11,7 +11,7 @@ namespace BagNotify
         /// <summary>
         /// Minutes
         /// </summary>
-        public int Interval { get; set; }
+        public int Interval { get; set; } = 5;
 
         public string Symbol { get; set; } = "BTCUSDT";
         public float? LessThan { get; set; } = null;

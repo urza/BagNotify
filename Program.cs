@@ -10,6 +10,8 @@ namespace BagNotify
     class Program
     {
         public static Options options { get; set; } = new Options();
+
+        public static bool stop = false;
         
         static async Task Main(string[] args)
         {
@@ -27,7 +29,7 @@ namespace BagNotify
 
             using var httpClient = new HttpClient();
 
-            while (true)
+            while (!stop)
             {
                 try
                 {
@@ -76,6 +78,8 @@ namespace BagNotify
 
             if (options.SentEmailOnAlert)
                 MailAlert(res);
+
+            stop = true;
         }
 
         private static void MailAlert(PriceResponse res)
@@ -96,62 +100,63 @@ namespace BagNotify
         {
             foreach (var arg in args.Select(x => x.ToLower()))
             {
-                if (arg.Contains("LessThan".ToLower()))
+                var opt = arg.Split('=')[0].ToLower().Replace("--", "");
+                if (opt.Equals("LessThan".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.LessThan = items[1].FloatParseCzEn();
                 }
-                if (arg.Contains("MoreThan".ToLower()))
+                if (opt.Equals("MoreThan".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.MoreThan = items[1].FloatParseCzEn();
                 }
-                if (arg.Contains("Interval".ToLower()))
+                if (opt.Equals("Interval".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.Interval = int.Parse(items[1]);
                 }
-                if (arg.Contains("Symbol".ToLower()))
+                if (opt.Equals("Symbol".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.Symbol = items[1].ToUpper();
                 }
-                if (args.Contains("SentEmailOnAlert".ToLower()))
+                if (opt.Equals("SentEmailOnAlert".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.SentEmailOnAlert = bool.Parse(items[1]);
                 }
-                if (args.Contains("EmailTo".ToLower()))
+                if (opt.Equals("EmailTo".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.EmailTo = items[1];
                 }
-                if (args.Contains("Smtp".ToLower()))
+                if (opt.Equals("Smtp".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.Smtp = items[1];
                 }
-                if (args.Contains("SmtpPassword".ToLower()))
+                if (opt.Equals("SmtpPassword".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.SmtpPassword = items[1];
                 }
-                if (args.Contains("SmtpUsername".ToLower()))
+                if (opt.Equals("SmtpUsername".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.SmtpUsername = items[1];
                 }
-                if (args.Contains("EmailFrom".ToLower()))
+                if (opt.Equals("EmailFrom".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.EmailFrom = items[1];
                 }
-                if (args.Contains("EmailFromName".ToLower()))
+                if (opt.Equals("EmailFromName".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.EmailFromName = items[1];
                 }
-                if (args.Contains("EmailSubject".ToLower()))
+                if (opt.Equals("EmailSubject".ToLower().Replace("--","")))
                 {
                     var items = arg.Split('=');
                     options.EmailSubject = items[1];
