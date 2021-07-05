@@ -18,9 +18,9 @@ namespace BagNotify
         public float? MoreThan { get; set; } = null;
 
         /// <summary>
-        /// sending emails on error
+        /// sending emails on price alert
         /// </summary>
-        public bool SentEmailOnError { get; set; } = false;
+        public bool SentEmailOnAlert { get; set; } = false;
         public string EmailTo { get; set; }
         public string Smtp { get; set; }
         public string SmtpPassword { get; set; }
@@ -28,7 +28,5 @@ namespace BagNotify
         public string EmailFrom { get; set; }
         public string EmailFromName { get; set; }
         public string EmailSubject { get; set; } = "bagnotify";
-        
-        //public string EmailBody { get; set; }
     }
 }
